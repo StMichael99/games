@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.3/fabric.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1 align = "center" style="color: #CBCBCB">КРОКОДИЛ v0.2</h1>
+
+	<div id="canvas_background_div" onclick="search()">
+		<canvas id="sketch_pad" height=600 width=600>
+	</div>
+	<!--<div style = "margin-top:10px;"><button onclick = "search()">SEND NUDES</button></div>-->
+
+	<div id = "chat">
+		<h1 id="chat_header" align="center">ЧАТ</h1>
+		<div id = "messages_container"></div>
+		<input id="chat_input" type="text" onKeydown = "sendMessage(this)">
+	</div>
+	 
+
+	<link href="main_styles.css" rel="stylesheet">
+	<script>
+		var canvas;
+
+        canvas = new fabric.Canvas('sketch_pad', {
+            isDrawingMode: false,
+            selection: false
+        });
+
+        canvas.forEachObject(function(o) {
+          o.selectable = false,
+          o.hoverCursor = 'Handwriting'
+        });
+
+
+        canvas.freeDrawingBrush.width = 10;
+
+        var connection = new WebSocket('ws://192.168.0.122:8189');
+        connection.onopen = function () {
+            connection.send('set_room_name:' + getUrlVars()['room']);
+            console.log('Connected!');
+        };
+
+        connection.onload = function () {
+            connection.send('get');
+        }
+
+        connection.onmessage = function (event) {
+            if (event.data.length == 0) {
+                return;
+            } else if (event.data.includes('objects')) {
+                canvas.loadFromJSON(event.data);
+                canvas.selection = false;
+                canvas.forEachObject(function(o) {
+                      o.selectable = false,
+                      o.hoverCursor = 'Handwriting'
+                });
+            } else if (event.data.includes('secret')){
+                alertWithSecretWord(event.data.replace("secret:", ""));
+            } else {
+                document.getElementById('messages_container').innerHTML =
+                      '<div id="message">' + event.data + '</div>' 
+                        + document.getElementById('messages_container').innerHTML; 
+            }
+
+            if (event.data.includes('is Winner')) {
+                canvas.isDrawingMode = false;
+                canvas.freeDrawingBrush.color = "rgba(" + getRandomInt(250) + "," + getRandomInt(250) + "," + getRandomInt(250) + ",.5)";
+                canvas.clear();
+                search();
+            } 
+        }
+
+        function alertWithSecretWord(argument) {
+            alert(argument);
+            canvas.isDrawingMode = true;
+            search();
+        }
+
+		function sendMessage(element){
+			if (event.key === 'Enter') {
+				connection.send(element.value);
+				element.value = '';
+			}
+		}
+
+		function search() {
+			var canvasJSON = JSON.stringify(canvas);
+			connection.send(canvasJSON); 
+		}
+
+		$('#canvas_background_div').on({ 
+			'touchend' : function(){ 
+				setTimeout(search, 100); 
+			} 
+		});
+
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		        vars[key] = value;
+		    });
+		    return vars;
+		}
+		function getRandomInt(max) {
+          return Math.floor(Math.random() * Math.floor(max));
+        }
+	</script>
+	 
+</body>
+</html>

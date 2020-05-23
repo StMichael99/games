@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.3/fabric.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+	<body>
+		<div id="myContainer">
+			<h1 align = "center" style="color: #CBCBCB">КРОКОДИЛ v0.2</h1>
+		</div>
+
+		<div>
+			<div id="rooms" style="float:left;">
+				<button onclick="openNameInputWindow2()">ROOM</button>
+				<div id="rooms_list"></div>
+			</div>
+			<div align="right" id="online_users">
+				<h1 id="chat_header" align="center">Онлайн</h1>
+				<div id = "messages_container"></div>
+			</div>
+		</div>
+
+		<div id="myModal" class="Modal is-hidden is-visuallyHidden">
+		    <div class="Modal-content">
+		        <input id="name_input" type="text" placeholder="Введите имя...">
+		        <button id="closeModal">OK</button>
+		    </div>
+		</div>
+
+		<div id="myModal2" class="Modal is-hidden is-visuallyHidden">
+		    <div class="Modal-content">
+		        <input id="name_input2" type="text" placeholder="Введите название комнаты...">
+		        <button id="closeModal2">OK</button>
+		    </div>
+		</div>
+
+		<link href="modal_styles.css" rel="stylesheet">
+		<link href="main_styles.css" rel="stylesheet">
+		<script type="text/javascript" src="modal.js"></script>
+		<script type="text/javascript" src="modal2.js"></script>
+		<script type="text/javascript" src="main_scripts.js"></script>
+	</body>
+</html>

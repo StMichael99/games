@@ -1,0 +1,105 @@
+	body {
+		background: #DA4453;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #89216B, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to left, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+
+	#online_users {
+		float: right;
+		text-align: center;
+		width: 300px;
+	    background-color: #CBCBCB;
+	   	opacity: 95%;
+	    border-radius: 20px;
+	    padding: 1%;
+	    max-height: auto;
+	}
+	
+	#messages_container {
+		height: 82%;
+		overflow-x: auto;
+		border-radius: 10px;
+	}
+
+	#messages_container::-webkit-scrollbar
+	{
+		width: 0px;
+	}
+
+	#message {
+		font-family: Consolas, monaco, monospace; 
+		font-size: 20px;
+		font-style: normal; 
+		font-variant: normal; 
+		font-weight: 400; 
+		line-height: 20px;
+		background-color: white;
+		border-radius: 10px;
+		margin-bottom: 4px;
+		padding: 7px;
+		overflow-wrap: break-word;
+	}
+
+	#chat_header {
+		margin-top: 1px;
+		font-family: Consolas, monaco, monospace; 
+		font-size: 30px;
+		font-style: normal; 
+		font-variant: normal; 
+		font-weight: 800; 
+	}
+
+	#chat {
+		float: left;
+		width: 300px;
+		height: 570px;
+	    background-color: #CBCBCB;
+	    opacity: 95%;
+	    border-radius: 20px;
+	    margin-left: 1%;
+	    padding: 1%;
+	}
+
+	#chat_input {
+		font-family: Consolas, monaco, monospace; 
+		font-size: 20px;
+		font-style: normal; 
+		font-variant: normal; 
+		font-weight: 400; 
+		line-height: 20px;
+		background-color: white;
+		border-radius: 10px;
+		width: 97%;
+		padding: 5px;
+		margin-top: 10px;
+	}
+
+    input:focus {
+        outline: none;
+    }
+
+    input {
+    	border-style: none;
+    }
+
+	#sketch_pad {
+		height: 100%;
+		width: 100%;
+		border-radius: 20px;
+	}
+
+	#canvas_background_div {
+		height: 600px;
+		width: 600px;
+	    background-color: #CBCBCB;
+	    opacity: 95%;
+	    border-radius: 20px;
+	    float: left;
+	    margin-left: 17%;
+	}
+
+	@media screen and (max-width: 1000px) {
+	    #canvas_background_div {
+	        margin-left: 2%;
+	    }
+	}
